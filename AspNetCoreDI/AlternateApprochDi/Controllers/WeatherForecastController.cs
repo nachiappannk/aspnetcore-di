@@ -11,29 +11,18 @@ namespace AlternateApprochDi.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly ToolFactory toolFactory;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ToolFactory toolFactory)
         {
-            _logger = logger;
+            this.toolFactory = toolFactory;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public string Get([FromQuery] string tooltype, [FromQuery] string input)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var tool = toolFactory.GetTool(tooltype);
+            return tool.Process(input);
         }
     }
 }
