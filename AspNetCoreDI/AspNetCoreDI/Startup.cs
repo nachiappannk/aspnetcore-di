@@ -33,7 +33,7 @@ namespace AspNetCoreDI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspNetCoreDI", Version = "v1" });
             });
-            services.AddScoped<SomeClass>();
+            services.AddSingleton<SomeClass>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
