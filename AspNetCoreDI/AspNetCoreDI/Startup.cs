@@ -34,15 +34,14 @@ namespace AspNetCoreDI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspNetCoreDI", Version = "v1" });
             });
             
-            services.AddTransient<SomeOtherClass>(GetSomeOtherClass);
+            services.AddTransient<SomeOtherClass>((sp) => {
+                var someClass = sp.GetService<SomeClass>();
+                return new SomeOtherClass(someClass, 5);
+            });
+
             services.AddTransient<SomeClass>();
         }
 
-        private static SomeOtherClass GetSomeOtherClass(IServiceProvider serviceProvider)
-        {
-            var someClass = serviceProvider.GetService<SomeClass>();
-            return new SomeOtherClass(someClass, 5);
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
