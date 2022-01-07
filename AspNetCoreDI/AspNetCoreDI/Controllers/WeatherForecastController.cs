@@ -28,8 +28,15 @@ namespace AspNetCoreDI.Controllers
     }
     public class SomeClass
     {
+        private readonly ILogger logger;
+
+        public SomeClass(ILogger<SomeClass> logger)
+        {
+            this.logger = logger;
+        }
         public string GetOutput()
         {
+            logger.LogInformation("Some class get output called");
             return "SomeClass :" + this.GetHashCode() + "\t\t"; 
         }
     }
