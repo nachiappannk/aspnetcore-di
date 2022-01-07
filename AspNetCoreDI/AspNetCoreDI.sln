@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreDI", "AspNetCoreDI\AspNetCoreDI.csproj", "{283B4DA0-E400-4622-A027-3363FC6CDEC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreDI", "AspNetCoreDI\AspNetCoreDI.csproj", "{283B4DA0-E400-4622-A027-3363FC6CDEC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiInterfaceDI", "MultiInterfaceDI\MultiInterfaceDI.csproj", "{46F1520C-E037-414D-B2EB-5A9285AD62E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{283B4DA0-E400-4622-A027-3363FC6CDEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{283B4DA0-E400-4622-A027-3363FC6CDEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{283B4DA0-E400-4622-A027-3363FC6CDEC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F1520C-E037-414D-B2EB-5A9285AD62E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F1520C-E037-414D-B2EB-5A9285AD62E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F1520C-E037-414D-B2EB-5A9285AD62E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F1520C-E037-414D-B2EB-5A9285AD62E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

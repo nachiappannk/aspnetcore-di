@@ -1,4 +1,3 @@
-using AspNetCoreDI.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AspNetCoreDI
+namespace MultiInterfaceDI
 {
     public class Startup
     {
@@ -31,18 +30,15 @@ namespace AspNetCoreDI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspNetCoreDI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MultiInterfaceDI", Version = "v1" });
             });
-            
-            services.AddTransient<SomeOtherClass>((sp) => {
-                var someClass = sp.GetService<SomeClass>();
-                var logger = sp.GetService<ILogger<SomeOtherClass>>();
-                return new SomeOtherClass(someClass, 5, logger);
-            });
+            services.AddSingleton<ITool, ATool>();
+            services.AddSingleton<ITool, BTool>();
+            services.AddSingleton<ITool, XTool>();
+            services.AddSingleton<ITool, YTool>();
+            services.AddSingleton<ToolFactory>();
 
-            services.AddTransient<SomeClass>();
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,7 +47,7 @@ namespace AspNetCoreDI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AspNetCoreDI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MultiInterfaceDI v1"));
             }
 
             app.UseHttpsRedirection();
@@ -67,15 +63,19 @@ namespace AspNetCoreDI
         }
     }
 
-    //what is a dependency
-    //Dependency injection (very basic) how to get it working in asp.net core
-    //Advantages over MEF and other frameworks
-    //Scoped, Transient and singleton
-    //Factory method
-    //Factory method as a lambda
-    //Logger
-    //Logger with factory
+    public class ToolFactory
+    {
+        private readonly IServiceProvider sp;
 
+        public ToolFactory(IServiceProvider sp)
+        {
+            this.sp = sp;
+        }
+
+        public ITool GetTool(string s)
+        {
+            var services = sp.GetServices<ITool>();
+            return services.FirstOrDefault(x => x.Id == s);
+        }
+    }
 }
-
-
