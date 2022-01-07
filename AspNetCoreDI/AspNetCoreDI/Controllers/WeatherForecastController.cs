@@ -38,7 +38,7 @@ namespace AspNetCoreDI.Controllers
     {
         private readonly SomeClass someclass;
 
-        public SomeOtherClass(SomeClass someclass)
+        public SomeOtherClass(SomeClass someclass, int intValue)
         {
             this.someclass = someclass;
         }
