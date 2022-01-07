@@ -44,13 +44,16 @@ namespace AspNetCoreDI.Controllers
     public class SomeOtherClass 
     {
         private readonly SomeClass someclass;
+        private readonly ILogger<SomeOtherClass> logger;
 
-        public SomeOtherClass(SomeClass someclass, int intValue)
+        public SomeOtherClass(SomeClass someclass, int intValue, ILogger<SomeOtherClass> logger)
         {
             this.someclass = someclass;
+            this.logger = logger;
         }
         public string GetOutput()
         {
+            logger.LogInformation("Some other class output called");
             return "SomeOtherClass :" + this.GetHashCode() + "(inside)"+ someclass.GetOutput()+ "\t\t";
         }
     }

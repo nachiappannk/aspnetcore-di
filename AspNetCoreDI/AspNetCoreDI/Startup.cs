@@ -36,7 +36,8 @@ namespace AspNetCoreDI
             
             services.AddTransient<SomeOtherClass>((sp) => {
                 var someClass = sp.GetService<SomeClass>();
-                return new SomeOtherClass(someClass, 5);
+                var logger = sp.GetService<ILogger<SomeOtherClass>>();
+                return new SomeOtherClass(someClass, 5, logger);
             });
 
             services.AddTransient<SomeClass>();
@@ -65,4 +66,12 @@ namespace AspNetCoreDI
             });
         }
     }
+
+    //what is a dependency
+    //Dependency injection (very basic) how to get it working in asp.net core
+    //Advantages over MEF and other frameworks
+    //Scoped, Transient and singleton
+    //Factory method
+    //Factory method as a lambda
+
 }
