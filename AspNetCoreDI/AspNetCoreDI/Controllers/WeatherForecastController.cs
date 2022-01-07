@@ -28,7 +28,7 @@ namespace AspNetCoreDI.Controllers
     {
         public string GetOutput()
         {
-            return "Hello World";
+            return "SomeClass :" + this.GetHashCode() + "\t"; 
         }
     }
 }
